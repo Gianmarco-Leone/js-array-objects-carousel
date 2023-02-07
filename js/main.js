@@ -61,6 +61,10 @@ const images = [
 const sliderContainerEl = document.getElementById("slider_item");
 const prevArrowEl = document.getElementById("arrow_prev");
 const nextArrowEl = document.getElementById("arrow_next");
+let clock;
+const buttonStartEl = document.getElementById("start");
+const buttonStopEl = document.getElementById("stop");
+const buttonRetroEl = document.getElementById("retro");
 
 // Creo contatore carosello 
 let activeImage = 0;
@@ -103,8 +107,6 @@ images.forEach((element, index) => {
 
 });
 
-autoplay();
-
 
 /********************************
  *                              *
@@ -116,23 +118,7 @@ autoplay();
 prevArrowEl.addEventListener(
     "click",
     function () {
-        // Recupero slide
-        const sliderImages = document.querySelectorAll(".item");
-
-        // Dalla slide con indice "activeImage" rimuovo la classe active
-        sliderImages[activeImage].classList.remove("active");
-
-        // Decremento activeImage
-        activeImage--;
-
-        // Se vado sotto il valore dell'indice minimo delle slide
-        if (activeImage < 0) {
-            // Riporto activeImage all'indice più alto
-            activeImage = sliderImages.length - 1;
-        }
-
-        // A questo punto riaggiungo classe active
-        sliderImages[activeImage].classList.add("active");
+        prevSlide();
     }
 );
 
@@ -140,28 +126,44 @@ prevArrowEl.addEventListener(
 nextArrowEl.addEventListener(
     "click",
     function () {
-        const sliderImages = document.querySelectorAll(".item");
-
-        sliderImages[activeImage].classList.remove("active");
-
-        activeImage++;
-
-        if (activeImage >= sliderImages.length) {
-            activeImage = 0;
-        }
-
-        sliderImages[activeImage].classList.add("active");
+        nextSlide();
     }
 );
 
+// Click tasto Start autoplay
+buttonStartEl.addEventListener(
+    "click",
+    function () {
+        autoplay(nextSlide);
+    }
+);
 
+// Click tasto Retro autoplay
+buttonRetroEl.addEventListener(
+    "click",
+    function () {
+        autoplay(prevSlide);
+    }
+);
+
+// Click tasto Stop autoplay
+buttonStopEl.addEventListener(
+    "click",
+    function () {
+        clearInterval(clock);
+    }
+);
 
 /********************************
  *                              *
- *           FUNCTION           *
+ *           FUNCTIONS          *
  *                              *
  ********************************/
 
+/**
+ * Funzione che recupera elementi di uno slider e gestendo le classi "item" e "active" crea uno scorrimento in avanti
+ * 
+ */
 function nextSlide() {
     const sliderImages = document.querySelectorAll(".item");
 
@@ -176,8 +178,30 @@ function nextSlide() {
     sliderImages[activeImage].classList.add("active");
 };
 
+/**
+ * Funzione che recupera elementi di uno slider e gestendo le classi "item" e "active" crea uno scorrimento all'indietro
+ * 
+ */
+function prevSlide() {
+    const sliderImages = document.querySelectorAll(".item");
+
+    sliderImages[activeImage].classList.remove("active");
+
+    activeImage--;
+
+    if (activeImage < 0) {
+        activeImage = sliderImages.length - 1;
+    }
+
+    sliderImages[activeImage].classList.add("active");
+};
 
 
-function autoplay() {
-    let clock = setInterval(nextSlide, 3000);
+/**
+ * Funzione che a seconda della funzione data come parametro genera uno scroll * automatico 
+ * 
+ * @param {function} scrollFunction funzione da dare come parametro per stabilire la direzione dello scroll automatico
+ */
+function autoplay(scrollFunction) {
+    clock = setInterval(scrollFunction, 3000);
 }
