@@ -62,6 +62,21 @@ const sliderContainerEl = document.getElementById("slider_item");
 const prevArrowEl = document.getElementById("arrow_prev");
 const nextArrowEl = document.getElementById("arrow_next");
 
+sliderContainerEl.innerHTML = `
+<div class="item active">
+    <img src="./${images[0].image}" alt="Carousel image">
+    <div class="item-text text-white
+    text-end">
+        <h1>
+            ${images[0].title}
+        </h1>
+        <p>
+            ${images[0].text}
+        </p>
+    </div>
+</div>
+`;
+
 
 /********************************
  *                              *
