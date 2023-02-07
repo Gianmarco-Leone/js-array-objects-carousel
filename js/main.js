@@ -82,7 +82,7 @@ images.forEach((element, index) => {
     let slideClass = "item";
     if (currentImageIndex == activeImage) {
         slideClass += " active";
-    }
+    };
 
     const sliderImage = `
     <div class=${slideClass}>
@@ -102,6 +102,8 @@ images.forEach((element, index) => {
     sliderContainerEl.innerHTML += sliderImage;
 
 });
+
+autoplay();
 
 
 /********************************
@@ -149,7 +151,6 @@ nextArrowEl.addEventListener(
         }
 
         sliderImages[activeImage].classList.add("active");
-
     }
 );
 
@@ -160,3 +161,23 @@ nextArrowEl.addEventListener(
  *           FUNCTION           *
  *                              *
  ********************************/
+
+function nextSlide() {
+    const sliderImages = document.querySelectorAll(".item");
+
+    sliderImages[activeImage].classList.remove("active");
+
+    activeImage++;
+
+    if (activeImage >= sliderImages.length) {
+        activeImage = 0;
+    }
+
+    sliderImages[activeImage].classList.add("active");
+};
+
+
+
+function autoplay() {
+    let clock = setInterval(nextSlide, 3000);
+}
