@@ -22,6 +22,13 @@
 
 // SVOLGIMENTO
 
+
+/********************************
+ *                              *
+ *           ON LOAD            *
+ *                              *
+********************************/
+
 // Array immagini
 const images = [
     {
@@ -50,3 +57,22 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+const sliderContainerEl = document.getElementById("slider_item");
+const prevArrowEl = document.getElementById("arrow_prev");
+const nextArrowEl = document.getElementById("arrow_next");
+
+
+/********************************
+ *                              *
+ *           ON CLICK           *
+ *                              *
+ ********************************/
+
+
+
+/********************************
+ *                              *
+ *           FUNCTION           *
+ *                              *
+ ********************************/
