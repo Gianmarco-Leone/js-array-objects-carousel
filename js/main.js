@@ -62,20 +62,46 @@ const sliderContainerEl = document.getElementById("slider_item");
 const prevArrowEl = document.getElementById("arrow_prev");
 const nextArrowEl = document.getElementById("arrow_next");
 
-sliderContainerEl.innerHTML = `
-<div class="item active">
-    <img src="./${images[0].image}" alt="Carousel image">
-    <div class="item-text text-white
-    text-end">
-        <h1>
-            ${images[0].title}
-        </h1>
-        <p>
-            ${images[0].text}
-        </p>
+// Creo contatore carosello 
+let activeImage = 0;
+
+// Ciclo l'array
+images.forEach((element, index) => {
+    const currentImageIndex = index;
+    console.log(currentImageIndex);
+
+    const currentImage = element.image;
+    console.log(currentImage);
+
+    const currentTitle = element.title;
+    console.log(currentTitle);
+
+    const currentText = element.text;
+    console.log(currentText);
+
+    let slideClass = "item";
+    if (currentImageIndex == activeImage) {
+        slideClass += " active";
+    }
+
+    const sliderImage = `
+    <div class=${slideClass}>
+        <img src="./${currentImage}" alt="Carousel image">
+        <div class="item-text text-white
+        text-end">
+            <h1>
+                ${currentTitle}
+            </h1>
+            <p>
+                ${currentText}
+            </p>
+        </div>
     </div>
-</div>
-`;
+    `;
+
+    sliderContainerEl.innerHTML += sliderImage;
+
+});
 
 
 /********************************
@@ -83,6 +109,49 @@ sliderContainerEl.innerHTML = `
  *           ON CLICK           *
  *                              *
  ********************************/
+
+// Click tasto slide precedente
+prevArrowEl.addEventListener(
+    "click",
+    function () {
+        // Recupero slide
+        const sliderImages = document.querySelectorAll(".item");
+
+        // Dalla slide con indice "activeImage" rimuovo la classe active
+        sliderImages[activeImage].classList.remove("active");
+
+        // Decremento activeImage
+        activeImage--;
+
+        // Se vado sotto il valore dell'indice minimo delle slide
+        if (activeImage < 0) {
+            // Riporto activeImage all'indice più alto
+            activeImage = sliderImages.length - 1;
+        }
+
+        // A questo punto riaggiungo classe active
+        sliderImages[activeImage].classList.add("active");
+    }
+);
+
+// Click tasto slide successiva
+nextArrowEl.addEventListener(
+    "click",
+    function () {
+        const sliderImages = document.querySelectorAll(".item");
+
+        sliderImages[activeImage].classList.remove("active");
+
+        activeImage++;
+
+        if (activeImage >= sliderImages.length) {
+            activeImage = 0;
+        }
+
+        sliderImages[activeImage].classList.add("active");
+
+    }
+);
 
 
 
