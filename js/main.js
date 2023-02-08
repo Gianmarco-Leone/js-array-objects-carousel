@@ -61,7 +61,7 @@ const images = [
 const sliderContainerEl = document.getElementById("slider_item");
 const prevArrowEl = document.getElementById("arrow_prev");
 const nextArrowEl = document.getElementById("arrow_next");
-let clock;
+// let clock;
 const buttonStartEl = document.getElementById("start");
 const buttonStopEl = document.getElementById("stop");
 const buttonRetroEl = document.getElementById("retro");
@@ -83,13 +83,8 @@ images.forEach((element, index) => {
     const currentText = element.text;
     console.log(currentText);
 
-    let slideClass = "item";
-    if (currentImageIndex == activeImage) {
-        slideClass += " active";
-    };
-
     const sliderImage = `
-    <div class="${slideClass}">
+    <div class="item ${(currentImageIndex == activeImage) ? "active" : ""}">
         <img src="./${currentImage}" alt="Carousel image">
         <div class="item-text text-white
         text-end">
@@ -114,44 +109,44 @@ images.forEach((element, index) => {
  ********************************/
 
 // Click tasto slide precedente
-prevArrowEl.addEventListener(
-    "click",
-    function () {
-        prevSlide();
-    }
-);
+// prevArrowEl.addEventListener(
+//     "click",
+//     function () {
+//         prevSlide();
+//     }
+// );
 
 // Click tasto slide successiva
-nextArrowEl.addEventListener(
-    "click",
-    function () {
-        nextSlide();
-    }
-);
+// nextArrowEl.addEventListener(
+//     "click",
+//     function () {
+//         nextSlide();
+//     }
+// );
 
 // Click tasto Start autoplay
-buttonStartEl.addEventListener(
-    "click",
-    function () {
-        autoplay(nextSlide);
-    }
-);
+// buttonStartEl.addEventListener(
+//     "click",
+//     function () {
+//         autoplay(nextSlide);
+//     }
+// );
 
 // Click tasto Retro autoplay
-buttonRetroEl.addEventListener(
-    "click",
-    function () {
-        autoplay(prevSlide);
-    }
-);
+// buttonRetroEl.addEventListener(
+//     "click",
+//     function () {
+//         autoplay(prevSlide);
+//     }
+// );
 
 // Click tasto Stop autoplay
-buttonStopEl.addEventListener(
-    "click",
-    function () {
-        clearInterval(clock);
-    }
-);
+// buttonStopEl.addEventListener(
+//     "click",
+//     function () {
+//         clearInterval(clock);
+//     }
+// );
 
 /********************************
  *                              *
@@ -161,89 +156,138 @@ buttonStopEl.addEventListener(
 
 /**
  * Funzione che recupera elementi di uno slider e gestendo le classi "item" e "active" crea uno scorrimento in avanti
- * 
+ *
  */
-function nextSlide() {
-    const sliderImages = document.querySelectorAll(".item");
+// function nextSlide() {
+//     const sliderImages = document.querySelectorAll(".item");
 
-    sliderImages[activeImage].classList.remove("active");
+//     sliderImages[activeImage].classList.remove("active");
 
-    activeImage++;
+//     activeImage++;
 
-    if (activeImage >= sliderImages.length) {
-        activeImage = 0;
-    }
+//     if (activeImage >= sliderImages.length) {
+//         activeImage = 0;
+//     }
 
-    sliderImages[activeImage].classList.add("active");
-};
+//     sliderImages[activeImage].classList.add("active");
+// };
 
 /**
  * Funzione che recupera elementi di uno slider e gestendo le classi "item" e "active" crea uno scorrimento all'indietro
- * 
+ *
  */
-function prevSlide() {
-    const sliderImages = document.querySelectorAll(".item");
+// function prevSlide() {
+//     const sliderImages = document.querySelectorAll(".item");
 
-    sliderImages[activeImage].classList.remove("active");
+//     sliderImages[activeImage].classList.remove("active");
 
+//     activeImage--;
+
+//     if (activeImage < 0) {
+//         activeImage = sliderImages.length - 1;
+//     }
+
+//     sliderImages[activeImage].classList.add("active");
+// };
+
+/**
+ * Funzione che a seconda della funzione data come parametro genera uno scroll * automatico
+ *
+ * @param {function} scrollFunction funzione da dare come parametro per stabilire la direzione dello scroll automatico
+ */
+// function autoplay(scrollFunction) {
+//     clock = setInterval(scrollFunction, 3000);
+// };
+
+// function switchToSlide(index) {
+//     const activeSlide = document.querySelector(".item.active");
+//     const allSlides = document.querySelectorAll(".item");
+//     activeSlide.classList.remove("active");
+//     allSlides[index].classList.add("active");
+// };
+
+
+/********************************
+ *                              *
+ *           CORREZIONE         *
+ *                              *
+ ********************************/
+
+// RECUPERO ELEMENTI THUMBNAILS DALL'HTML
+const thumbsEl = document.querySelectorAll(".thumbnails");
+
+// CICLO GLI ELEMENTI E AGGIUNGO LA SELEZIONE DELL'IMMAGINE SULL'EVENTO CLICK
+thumbsEl.forEach((thumbEl, index) => {
+    thumbEl.addEventListener(
+        "click",
+        function () {
+            const thisIndex = this.getAttribute("data-index");
+            console.log(thisIndex);
+            switchToSlide(thisIndex);
+        }
+    );
+});
+
+// CREO ARROW FUNCTION PER CLICK SULLA FRECCIA "IMMAGINE SUCCESSIVA"
+const onNextClick = () => {
+    activeImage++;
+
+    if (activeImage >= images.length) {
+        activeImage = 0;
+    };
+
+    console.log(activeImage);
+
+    switchToSlide(activeImage);
+};
+
+// CREO ARROW FUNCTION PER CLICK SULLA FRECCIA "IMMAGINE PRECEDENTE"
+const onPrevClick = () => {
     activeImage--;
 
     if (activeImage < 0) {
-        activeImage = sliderImages.length - 1;
-    }
+        activeImage = images.length - 1;
+    };
 
-    sliderImages[activeImage].classList.add("active");
-};
+    console.log(activeImage);
 
-/**
- * Funzione che a seconda della funzione data come parametro genera uno scroll * automatico 
- * 
- * @param {function} scrollFunction funzione da dare come parametro per stabilire la direzione dello scroll automatico
- */
-function autoplay(scrollFunction) {
-    clock = setInterval(scrollFunction, 3000);
+    switchToSlide(activeImage);
 }
 
+// EVENTO AL CLICK DELLA FRECCIA "IMMAGINE SUCCESSIVA"
+nextArrowEl.addEventListener("click", onNextClick);
 
-// BONUS 1
-// const thumbnailsEl1 = document.getElementById("thumb_1");
-// const thumbnailsEl2 = document.getElementById("thumb_2");
-// const thumbnailsEl3 = document.getElementById("thumb_3");
-// const thumbnailsEl4 = document.getElementById("thumb_4");
-// const thumbnailsEl5 = document.getElementById("thumb_5");
+// EVENTO AL CLICK DELLA FRECCIA "IMMAGINE PRECEDENTE"
+prevArrowEl.addEventListener("click", onPrevClick);
 
-// thumbnailsEl1.addEventListener(
-//     "click",
-//     function () {
-//         const sliderImages = document.querySelectorAll(".item.active");
-//         console.log(sliderImages, typeof sliderImages);
-//     }
-// );
+// FUNZIONE PER CAMBIARE SLIDE CHE UTILIZZO NELLE ARROW FUNCTION "NextClick" e "PrevClick"
+function switchToSlide(index) {
+    const activeSlide = document.querySelector(".item.active");
+    activeSlide.classList.remove("active");
+    const allSlides = document.querySelectorAll(".item");
+    allSlides[index].classList.add("active");
+};
 
-// thumbnailsEl2.addEventListener(
-//     "click",
-//     function () {
+// DICHIARO VARIABILE AUTOPLAY 
+let autoplay;
 
-//     }
-// );
+// CREO EVENTO AL CLICK DEL BOTTONE "START AUTOPLAY"
+buttonStartEl.addEventListener(
+    "click",
+    function () {
+        autoplay = setInterval(() => { onNextClick(); }, 3000);
+    }
+);
 
-// thumbnailsEl3.addEventListener(
-//     "click",
-//     function () {
+// CREO EVENTO AL CLICK DEL BOTTONE "STOP" (azzero variabile autoplay)
+buttonStopEl.addEventListener("click", () => {
+    clearInterval(autoplay);
+});
 
-//     }
-// );
-
-// thumbnailsEl4.addEventListener(
-//     "click",
-//     function () {
-
-//     }
-// );
-
-// thumbnailsEl5.addEventListener(
-//     "click",
-//     function () {
-
-//     }
-// );
+// CREO EVENTO AL CLICK DEL BOTTONE "RETROPLAY"
+buttonRetroEl.addEventListener(
+    "click",
+    function () {
+        autoplay = setInterval(() => { onPrevClick(); }, 3000);
+    }
+);

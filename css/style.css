@@ -3,6 +3,10 @@
     height: 100vh;
 }
 
+.container .row {
+    position: relative;
+}
+
 .col-10 {
     height: 50vh;
     padding: 0;
@@ -39,7 +43,6 @@ img {
     height: calc(50vh / 5);
     flex-basis: auto;
     padding: 0;
-    position: relative;
 }
 
 .col.thumbnails {
@@ -53,18 +56,15 @@ img {
     height: 30px;
     position: absolute;
     font-size: 20px;
-    right: 45%;
+    right: 7%;
     cursor: pointer;
-    background-color: #999;
     color: #444;
-    border-radius: 50%;
-    text-align: center;
 }
 
 #arrow_prev {
-    top: 5%;
+    top: -10%;
 }
 
 #arrow_next {
-    bottom: 5%;
+    bottom: -10%;
 }
