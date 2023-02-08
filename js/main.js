@@ -89,13 +89,13 @@ images.forEach((element, index) => {
     };
 
     const sliderImage = `
-    <div class=${slideClass}>
+    <div class="${slideClass}">
         <img src="./${currentImage}" alt="Carousel image">
         <div class="item-text text-white
         text-end">
-            <h1>
+            <h2>
                 ${currentTitle}
-            </h1>
+            </h2>
             <p>
                 ${currentText}
             </p>
@@ -106,7 +106,6 @@ images.forEach((element, index) => {
     sliderContainerEl.innerHTML += sliderImage;
 
 });
-
 
 /********************************
  *                              *
@@ -196,7 +195,6 @@ function prevSlide() {
     sliderImages[activeImage].classList.add("active");
 };
 
-
 /**
  * Funzione che a seconda della funzione data come parametro genera uno scroll * automatico 
  * 
@@ -205,3 +203,47 @@ function prevSlide() {
 function autoplay(scrollFunction) {
     clock = setInterval(scrollFunction, 3000);
 }
+
+
+// BONUS 1
+// const thumbnailsEl1 = document.getElementById("thumb_1");
+// const thumbnailsEl2 = document.getElementById("thumb_2");
+// const thumbnailsEl3 = document.getElementById("thumb_3");
+// const thumbnailsEl4 = document.getElementById("thumb_4");
+// const thumbnailsEl5 = document.getElementById("thumb_5");
+
+// thumbnailsEl1.addEventListener(
+//     "click",
+//     function () {
+//         const sliderImages = document.querySelectorAll(".item.active");
+//         console.log(sliderImages, typeof sliderImages);
+//     }
+// );
+
+// thumbnailsEl2.addEventListener(
+//     "click",
+//     function () {
+
+//     }
+// );
+
+// thumbnailsEl3.addEventListener(
+//     "click",
+//     function () {
+
+//     }
+// );
+
+// thumbnailsEl4.addEventListener(
+//     "click",
+//     function () {
+
+//     }
+// );
+
+// thumbnailsEl5.addEventListener(
+//     "click",
+//     function () {
+
+//     }
+// );

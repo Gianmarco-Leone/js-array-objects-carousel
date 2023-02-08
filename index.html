@@ -30,19 +30,20 @@
 
     <div class="container d-flex flex-column justify-content-center">
 
+        <h1 class="text-center">NUOVE USCITE</h1>
+
         <div class="row">
 
             <!-- CONTENITORE IMMAGINI CAROSELLO -->
             <div id="slider_item" class="col-10">
                 <!-- QUI INSERISCO IMMAGINI CAROSELLO CON JS -->
-
             </div>
 
             <div class="col-2">
 
                 <div class="row flex-column">
 
-                    <div class="col">
+                    <div id="thumb_1" class="col thumbnails">
                         <img src="./img/01.webp" alt="Carousel image">
                         <!-- SLIDER ARROW -->
                         <div id="arrow_prev">
@@ -50,19 +51,19 @@
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div id="thumb_2" class="col thumbnails">
                         <img src="./img/02.webp" alt="Carousel image">
                     </div>
 
-                    <div class="col">
+                    <div id="thumb_3" class="col thumbnails">
                         <img src="./img/03.webp" alt="Carousel image">
                     </div>
 
-                    <div class="col">
+                    <div id="thumb_4" class="col thumbnails">
                         <img src="./img/04.webp" alt="Carousel image">
                     </div>
 
-                    <div class="col">
+                    <div id="thumb_5" class="col thumbnails">
                         <img src="./img/05.webp" alt="Carousel image">
                         <!-- SLIDER ARROW -->
                         <div id="arrow_next">
@@ -76,7 +77,7 @@
 
         </div>
 
-        <div class="bottom-container mt-5 w-50 mx-auto">
+        <div class="bottom-container mt-5 mx-auto">
             <button type="button" id="start" class="btn btn-primary">AUTOPLAY</button>
             <button type="button" id="retro" class="btn btn-primary">RETROPLAY</button>
             <button type="button" id="stop" class="btn btn-primary">STOP</button>

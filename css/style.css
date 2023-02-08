@@ -42,6 +42,10 @@ img {
     position: relative;
 }
 
+.col.thumbnails {
+    cursor: pointer;
+}
+
 /* SLIDER ARROW */
 #arrow_prev,
 #arrow_next {
